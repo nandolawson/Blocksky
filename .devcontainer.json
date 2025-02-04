@@ -1,0 +1,70 @@
+{
+	"appPort": [],
+	"capAdd": [],
+	"containerEnv": {},
+	"containerUser": "",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"DavidAnson.vscode-markdownlint",
+				"dbaeumer.vscode-eslint",
+				"fill-labs.dependi",
+				"github.vscode-github-actions"
+			],
+			"settings": {
+				"[typescript]": {
+					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+				},
+				"editor.formatOnSave": true,
+				"eslint.codeActionsOnSave.mode": "all",
+				"eslint.format.enable": true,
+				"markdownlint.run": "onType",
+				"tslint.enable": false
+			}
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:latest": {
+			"installDirectlyFromGitHubRelease": true,
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/node:latest": {
+			"installYarnUsingApt": true,
+			"nodeGypDependencies": true,
+			"nvmInstallPath": "/usr/local/share/nvm",
+			"nvmVersion": "latest",
+			"pnpmVersion": "latest",
+			"version": "22"
+		}
+	},
+	"forwardPorts": [],
+	"hostRequirements": {
+		"cpus": 1,
+		"gpu": false,
+		"memory": "2gb",
+		"storage": "5gb"
+	},
+	"image": "debian:latest",
+	"init": false,
+	"initializeCommand": "",
+	"mounts": [],
+	"name": "Blocksky",
+	"onCreateCommand": "",
+	"otherPortsAttributes": {},
+	"overrideCommand": true,
+	"overrideFeatureInstallOrder": [],
+	"portsAttributes": {},
+	"postAttachCommand": "",
+	"postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts",
+	"postStartCommand": "yarn install",
+	"privileged": false,
+	"remoteEnv": {},
+	"remoteUser": "",
+	"runArgs": [],
+	"securityOpt": [],
+	"shutdownAction": "stopContainer",
+	"updateContentCommand": "",
+	"updateRemoteUserUID": true,
+	"userEnvProbe": "loginInteractiveShell",
+	"waitFor": "updateContentCommand"
+}
