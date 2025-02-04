@@ -37,4 +37,4 @@ The easiest option would be to provide good moderation lists via GitHub issues. 
 
 ### 2. Code contributions
 
-As in any other GitHub repo, you can of course improve the code or add features. All you have to do is open a pull request and I will look at the changes as soon as possible. However, it is necessary to adhere to the license.
+As in any other GitHub repo, you can of course improve the code or add features. All you have to do is open a pull request and I will look at the changes as soon as possible. However, it is necessary to adhere to the [license](https://github.com/nandolawson/Blocksky/blob/main/LICENSE).
