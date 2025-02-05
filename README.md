@@ -12,7 +12,7 @@ The goal of Blocksky is to provide as many unpleasant accounts as possible for e
 
 ## How?
 
-In addition to adding accounts to this list myself, various trustworthy moderation lists are also retrieved daily and the accounts contained therein are entered into Blocksky. Here is a list of the lists currently in use:
+In addition to adding accounts to this list myself, various trustworthy moderation lists are also retrieved daily and the accounts contained therein are entered into Blocksky.
 
 ## Contributing
 
