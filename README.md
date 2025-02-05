@@ -14,17 +14,6 @@ The goal of Blocksky is to provide as many unpleasant accounts as possible for e
 
 In addition to adding accounts to this list myself, various trustworthy moderation lists are also retrieved daily and the accounts contained therein are entered into Blocksky. Here is a list of the lists currently in use:
 
-<!-- markdownlint-disable MD033 -->
-<details>
-    <summary>Moderation lists used</summary>
-    <ul>
-        <li><a href="https://bsky.app/profile/dirkhagemann.substack.com/lists/3lfl4oghy5t2b">💩 Block</a> by <a href="https://bsky.app/profile/dirkhagemann.substack.com">Dirk Hagemann</a></li>
-        <li><a href="https://bsky.app/profile/keencommander.bsky.social/lists/3lbjfuywg4s26">Commanders Blockliste für ein sauberes Bluesky</a> by <a href="https://bsky.app/profile/keencommander.bsky.social">Commander Keen</a></li>
-        <li><a href="https://bsky.app/profile/dirkhagemann.substack.com/lists/3lfwwvgnzzs2u">Russenbots blockieren</a> by <a href="https://bsky.app/profile/dirkhagemann.substack.com">Dirk Hagemann</a></li>
-    </ul>
-</details>
-<!-- markdownlint-enable MD033 -->
-
 ## Contributing
 
 Anyone who wants to contribute is more than welcome to do so. There are two options:
