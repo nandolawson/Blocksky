@@ -18,7 +18,15 @@
 				"editor.formatOnSave": true,
 				"eslint.codeActionsOnSave.mode": "all",
 				"eslint.format.enable": true,
+				"files.exclude": {
+					"node_modules": true,
+					"yarn.lock": true
+				},
 				"markdownlint.run": "onType",
+				"search.exclude": {
+					"node_modules": true,
+					"yarn.lock": true
+				},
 				"tslint.enable": false
 			}
 		}

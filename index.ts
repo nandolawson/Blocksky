@@ -13,7 +13,7 @@ async function getDidFromHandle(handle: string): Promise<string> {
     }
 }
 
-async function getHandlesFromList(did: string, list: string): Promise<string[]> {
+async function getDidFromList(did: string, list: string): Promise<string[]> {
     let cursor: string | undefined;
     const members: string[] = [];
     try {
@@ -24,8 +24,8 @@ async function getHandlesFromList(did: string, list: string): Promise<string[]> 
             });
             if (res && res.data) {
                 res.data.items.forEach(item => {
-                    if (item.subject && item.subject.handle) {
-                        members.push(item.subject.handle);
+                    if (item.subject && item.subject.did) {
+                        members.push(item.subject.did);
                     }
                 });
                 cursor = res.data.cursor;
@@ -62,8 +62,13 @@ async function login(identifier: string, password: string): Promise<void> {
         });
 }
 
-async function pushArray(array: string[], did: string, list: string): Promise<void> {
+async function pushArray(array: string[], did: string, list: string): Promise<string[]> {
+    const addedDids = [];
     for (const addToList of array) {
+        if (counter >= 800) {
+            console.log("Max counter reached, stopping execution.");
+            process.exit(0);
+        }
         try {
             await agent.com.atproto.repo.createRecord({
                 collection: "app.bsky.graph.listitem",
@@ -71,20 +76,22 @@ async function pushArray(array: string[], did: string, list: string): Promise<vo
                 record: {
                     $type: 'app.bsky.graph.listitem',
                     list: `at://${did}/app.bsky.graph.list/${list}`,
-                    subject: `${await getDidFromHandle(addToList)}`,
+                    subject: addToList,
                     createdAt: new Date().toISOString(),
                 },
             });
             console.log(`Added user ${addToList} to list`);
+            addedDids.push(addToList);
+            counter++;
         } catch (error) {
             console.error(`Error while adding user ${addToList}:`, error);
         }
     }
+    return addedDids;
 }
 
 async function main() {
-    const listsData = fs.readFileSync('lists.json', 'utf-8');
-    const lists: { did: string; list: string }[] = JSON.parse(listsData);
+    const lists: { did: string; list: string }[] = JSON.parse(fs.readFileSync('lists.json', 'utf-8'));
     const identifier = process.env['IDENTIFIER'];
     const password = process.env['PASSWORD'];
     const blocksky_list = process.env['LIST'];
@@ -92,22 +99,33 @@ async function main() {
         throw new Error("Secrets are not correctly set");
     }
     await login(identifier, password);
+    console.info("Get entries from Blocksky")
+    console.time("Done")
+    const blocksky = await getDidFromList(
+        await getDidFromHandle(identifier),
+        blocksky_list
+    );
+    console.timeEnd("Done")
     for (const entry of lists) {
         const { did, list } = entry;
-        const original = await getHandlesFromList(
+        console.info(`Crawling through list ${list}...`)
+        console.time("Done");
+        const original = await getDidFromList(
             did,
             list
         );
-        const blocksky = await getHandlesFromList(
-            await getDidFromHandle(identifier),
-            blocksky_list
+        console.timeEnd("Done");
+        console.info("Add possible entries to Blocksky");
+        blocksky.push(...
+            await pushArray(
+                original.filter(item => !blocksky.includes(item)),
+                await getDidFromHandle(identifier),
+                blocksky_list
+            )
         );
-        await pushArray(
-            original.filter(item => !blocksky.includes(item)),
-            await getDidFromHandle(identifier),
-            blocksky_list
-        );
+        console.info("Done");
     }
 }
 
+let counter = 0;
 main();
